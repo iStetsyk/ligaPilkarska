@@ -55,6 +55,18 @@
             <artifactId>opencsv</artifactId>
             <version>4.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>3.1.9</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 

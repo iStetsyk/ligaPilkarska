@@ -31,5 +31,4 @@ class LeagueManager {
         FileManager.readCSVFile().forEach(array -> System.out.println(Arrays.toString(array)));
     }
 
-
 }

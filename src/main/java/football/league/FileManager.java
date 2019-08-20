@@ -1,6 +1,8 @@
 package football.league;
 
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
 import java.io.FileReader;
@@ -13,9 +15,18 @@ import static java.util.stream.Collectors.toList;
 
 class FileManager {
 
-    public static List<Team> readTeamsFromFile() {
+    public static List<Team> readTeamsFromFile() throws IOException {
+        CSVParserBuilder parserBuilder = new CSVParserBuilder() // parser builder do parametrów
+                .withEscapeChar('\\')
+                .withIgnoreLeadingWhiteSpace(true)
+                .withQuoteChar('"')
+                .withSeparator(';');
 
-        return null;
+        CSVReaderBuilder readerBuilder = new CSVReaderBuilder(new FileReader("teams.csv")).withCSVParser(parserBuilder.build());
+        CSVReader reader = readerBuilder.build();
+        return reader.readAll().stream()
+                .map(FileManager::arrayToTeam)
+                .collect(toList());
     }
 
     public static void dumpTeamsToFile(List<Team> teams) throws IOException {
@@ -32,9 +43,7 @@ class FileManager {
                 .peek(System.out::println)
                 .collect(toList())
         );
-
         writer.close();
-
     }
 
 
@@ -48,7 +57,8 @@ class FileManager {
 
         writer.writeAll(matches.stream()
                 .map(FileManager::matchToArray)
-                .collect(toList()));
+                .collect(toList())
+        );
         writer.close();
     }
 
@@ -75,5 +85,12 @@ class FileManager {
                 team.getName(),
                 String.join(",", team.getPlayers())
         };
+    }
+
+    private static Team arrayToTeam(String[] row) {
+        int id = Integer.parseInt(row[0]);
+        String teamName = row[1];
+        List<String> players = Arrays.asList(row[2].split(","));
+        return new Team(id, players, teamName);
     }
 }
