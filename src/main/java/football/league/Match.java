@@ -1,11 +1,15 @@
 package football.league;
 
+import lombok.ToString;
+
 /**
  * Reprezentuje konkretny, zakończony pojedynek.
  * Ma gospodarza (host), gościa (away) i wynik i listę strzelców bramek.
  */
+@ToString
 class Match {
 
+    private int id;
     private Team host;
     private Team away;
     private String result;
@@ -15,7 +19,8 @@ class Match {
     public Match() {
     }
 
-    public Match(Team host, Team away, String result) {
+    public Match(int id, Team host, Team away, String result) {
+        this.id = id;
         this.host = host;
         this.away = away;
         this.result = result;
@@ -50,6 +55,14 @@ class Match {
 
     public void setHost(Team host) {
         this.host = host;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Team getAway() {

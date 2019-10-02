@@ -1,8 +1,6 @@
 package football.league;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,9 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 class Team {
 
-    private final int id;
+    private int id;
     private List<String> players;
     private String name;
 
